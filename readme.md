@@ -1,6 +1,6 @@
 ### Frequently Asked JavaScript Interview Questions
 
-### [React Interview Questions](#ReactJS.md)
+### [React Interview Questions](./ReactJS.md)
 
 #### 1. Implement Debounce
 
