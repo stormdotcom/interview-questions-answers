@@ -158,7 +158,7 @@ Sure, here's a detailed answer to each of the topics in Markdown format:
 
 ---
 
-## Defer & Async Attributes of Script Tag
+#### 7. Defer & Async Attributes of Script Tag
 
 ### Defer
 The `defer` attribute tells the browser to download the script in the background while the HTML document is still being parsed. The script is executed after the document has been completely parsed.
@@ -167,7 +167,7 @@ The `defer` attribute tells the browser to download the script in the background
 <script src="script.js" defer></script>
 ```
 
-### Async
+#### 8. Async
 The `async` attribute also downloads the script in the background, but the script is executed as soon as it is downloaded, without waiting for the HTML parsing to complete.
 
 ```html
@@ -187,10 +187,10 @@ async function fetchData() {
 }
 ```
 
-### Event Loops
+#### 9. Async Event Loops
 The event loop is a mechanism that allows JavaScript to perform non-blocking operations by offloading operations to the system kernel whenever possible.
 
-### Callback Functions
+#### 10. Callback Functions
 A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
 
 ```javascript
@@ -205,7 +205,7 @@ fetchData((message) => {
 });
 ```
 
-## Promises
+#### 11. Promises
 A promise is an object representing the eventual completion or failure of an asynchronous operation.
 
 ```javascript
@@ -225,7 +225,7 @@ promise.then((message) => {
 });
 ```
 
-## Array Methods
+#### 12. Array Methods
 
 ### forEach
 Executes a provided function once for each array element.
@@ -258,7 +258,7 @@ let evens = [1, 2, 3, 4].filter((num) => num % 2 === 0);
 console.log(evens); // [2, 4]
 ```
 
-## Splice & Slice Difference
+#### 13.Splice & Slice Difference
 
 ### Splice
 Changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
@@ -278,7 +278,7 @@ let newArray = array.slice(1, 3);
 console.log(newArray); // [2, 3]
 ```
 
-## Prototype
+#### 13.Prototype
 Prototypes are the mechanism by which JavaScript objects inherit features from one another.
 
 ```javascript
@@ -294,7 +294,7 @@ let john = new Person('John');
 john.greet(); // Hello, my name is John
 ```
 
-## Difference Between call, bind, apply
+#### 14. Difference Between call, bind, apply
 
 ### call
 Calls a function with a given `this` value and arguments provided individually.
@@ -323,7 +323,7 @@ let greetJohn = greet.bind(person, 'Hey');
 greetJohn(); // Hey, my name is John
 ```
 
-## Object Methods
+#### 15.Object Methods
 
 ### Object.keys()
 Returns an array of a given object's own enumerable property names.
@@ -347,7 +347,7 @@ Returns an array of a given object's own enumerable property [key, value] pairs.
 console.log(Object.entries(obj)); // [["a", 1], ["b", 2], ["c", 3]]
 ```
 
-## Convert Array to Strings
+#### 16. Convert Array to Strings
 Convert an array to a string using `toString()`, `join()`, or `JSON.stringify()`.
 
 ```javascript
@@ -362,7 +362,7 @@ console.log(str2); // "1-2-3-4-5"
 let str3 = JSON.stringify(array);
 console.log(str3); // "[1,2,3,4,5]"
 ```
-
+#### MISC
 ## ES6 Features
 
 ### Arrow Functions
