@@ -1,4 +1,4 @@
-Sure! Here is the detailed breakdown including JavaScript code examples for each topic:
+
 
 ### How Web Works: Communication Protocols
 
