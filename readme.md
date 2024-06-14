@@ -1,7 +1,7 @@
 ### Frequently Asked JavaScript Interview Questions
 
 ### [React Interview Questions](./ReactJS.md)
-### [High Level Design - FrontEnd](.HLD_FE/FE.md)
+### [High Level Design - FrontEnd](./HLD_FE/FE.md)
 
 #### 1. Implement Debounce
 
