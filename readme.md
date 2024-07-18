@@ -2,6 +2,7 @@
 
 ### [React Interview Questions](./ReactJS.md)
 ### [System Design - FrontEnd](./HLD_FE/FE.md)
+### [System Design - FrontEnd](./NextJS.md)
 
 #### 1. Implement Debounce
 
@@ -478,4 +479,26 @@ socket.onmessage = (event) => {
     console.log('Message from server ', event.data);
 };
 ```
+
+---
+
+#### 10. **How can you copy an object by value, not by reference, in JavaScript?**
+To copy an object by value in JavaScript, you can use methods like `Object.assign({}, originalObject)` or the spread operator `{...originalObject}` for shallow copies. For deep copies, you can use `JSON.parse(JSON.stringify(originalObject))` or libraries like Lodash with `_.cloneDeep(originalObject)`.
+
+#### 11. **What is the `this` keyword in an arrow function in JavaScript?**
+In arrow functions, the `this` keyword does not refer to the function itself as it does in regular functions. Instead, it inherits `this` from the surrounding lexical scope, maintaining the context from where the arrow function is defined.
+
+#### 12. **Which Git command enables you to pick up commits from a branch within a repository and apply them to another branch?**
+The `git cherry-pick` command enables you to pick specific commits from one branch and apply them to another branch. This command is useful for integrating particular changes without merging entire branch histories.
+
+#### 13. **What are Git hooks?**
+Git hooks are scripts that Git executes before or after events such as committing changes, merging branches, pushing commits, and more. These hooks are customizable and can automate tasks, enforce policies, and integrate with external systems.
+
+#### 14. **How can you return the names of people who are reported to (excluding null values), the number of members that report to them, and the average age of those members as an integer, ordered by names alphabetically?**
+To achieve this, you can write a SQL query that selects the `ReportsTo` column, counts the number of members reporting to each person, and calculates the average age. The query will group by `ReportsTo`, exclude null values, and order the results alphabetically by `ReportsTo`.
+
+#### 15. **How can you find the first word with the greatest number of repeated letters in a string in JavaScript?**
+To find the first word with the greatest number of repeated letters in a string, split the string into words, define a function to count repeated letters in each word, and iterate through the words to determine which word has the highest count of repeated letters. Return the first word that meets this criterion.
+
+---
 
