@@ -2,7 +2,7 @@
 
 ### [React Interview Questions](./ReactJS.md)
 ### [System Design - FrontEnd](./HLD_FE/FE.md)
-### [System Design - FrontEnd](./NextJS.md)
+### [NExtJS ](./NextJS.md)
 
 #### 1. Implement Debounce
 
