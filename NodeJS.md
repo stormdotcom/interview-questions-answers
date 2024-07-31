@@ -203,4 +203,22 @@ db.collection.aggregate([
 
 Normalization aims to minimize redundancy and improve the efficiency and integrity of a database.
 
+## **What are Git hooks?**
+
+Git hooks are scripts that Git executes before or after events such as committing changes, merging branches, pushing commits, and more. These hooks are customizable and can automate tasks, enforce policies, and integrate with external systems. Examples include pre-commit hooks for linting code or post-commit hooks for deploying changes.
+
+## **How can you return the names of people who are reported to (excluding null values), the number of members that report to them, and the average age of those members as an integer, ordered by names alphabetically?**
+
+To achieve this, you can use the following SQL query:
+```sql
+SELECT ReportsTo AS Name,
+       COUNT(*) AS NumberOfMembers,
+       FLOOR(AVG(Age)) AS AverageAge
+FROM Employees
+WHERE ReportsTo IS NOT NULL
+GROUP BY ReportsTo
+ORDER BY ReportsTo;
+```
+This query selects the `ReportsTo` column, counts the number of members reporting to each person, calculates the average age (rounded down to the nearest integer), excludes null values, and orders the results alphabetically by `ReportsTo`.
+
 ```

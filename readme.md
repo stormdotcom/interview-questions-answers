@@ -677,5 +677,21 @@ JavaScript handles asynchronous operations using:
   fetchData();
   ```
 
+## **How can you copy an object by value, not by reference, in JavaScript?**
+
+To copy an object by value in JavaScript, you can use methods like:
+- **Shallow Copy:**
+  - `Object.assign({}, originalObject)` 
+  - `{...originalObject}`
+- **Deep Copy:**
+  - `JSON.parse(JSON.stringify(originalObject))`
+  - Libraries like Lodash with `_.cloneDeep(originalObject)`
+
+Shallow copies only copy the top-level properties, while deep copies clone the entire object, including nested properties.
+
+## **What is the `this` keyword in an arrow function in JavaScript?**
+
+In arrow functions, the `this` keyword does not refer to the function itself as it does in regular functions. Instead, it inherits `this` from the surrounding lexical scope, maintaining the context from where the arrow function is defined. This means that `this` in an arrow function is consistent with the `this` of the outer function or context.
+
 ```
 
