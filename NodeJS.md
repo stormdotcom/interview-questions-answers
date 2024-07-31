@@ -1,6 +1,4 @@
-Certainly! Here’s the updated Markdown content including the normalization concepts and the three types of normal forms:
 
-```markdown
 # Interview Questions and Answers
 
 ## 1. User System Workflow
