@@ -482,11 +482,9 @@ socket.onmessage = (event) => {
 };
 ```
 
----
 
-Certainly! Here is the content formatted in Markdown, each topic addressed without numbering:
 
-```markdown
+
 # JavaScript Concepts
 
 ## Workflow of JavaScript
