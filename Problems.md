@@ -1,5 +1,3 @@
-
-```markdown
 # Problems and Solutions
 
 ## **How can you copy an object by value, not by reference, in JavaScript?**
