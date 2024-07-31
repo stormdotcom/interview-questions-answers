@@ -2,7 +2,9 @@
 
 ### [React Interview Questions](./ReactJS.md)
 ### [System Design - FrontEnd](./HLD_FE/FE.md)
-### [NExtJS ](./NextJS.md)
+### [Problem Solving ](./Problems.md)
+### [NextJS ](./NextJS.md)
+### [NodeJS ](./NodeJS.md)
 
 #### 1. Implement Debounce
 
@@ -482,23 +484,200 @@ socket.onmessage = (event) => {
 
 ---
 
-#### 10. **How can you copy an object by value, not by reference, in JavaScript?**
-To copy an object by value in JavaScript, you can use methods like `Object.assign({}, originalObject)` or the spread operator `{...originalObject}` for shallow copies. For deep copies, you can use `JSON.parse(JSON.stringify(originalObject))` or libraries like Lodash with `_.cloneDeep(originalObject)`.
+Certainly! Here is the content formatted in Markdown, each topic addressed without numbering:
 
-#### 11. **What is the `this` keyword in an arrow function in JavaScript?**
-In arrow functions, the `this` keyword does not refer to the function itself as it does in regular functions. Instead, it inherits `this` from the surrounding lexical scope, maintaining the context from where the arrow function is defined.
+```markdown
+# JavaScript Concepts
 
-#### 12. **Which Git command enables you to pick up commits from a branch within a repository and apply them to another branch?**
-The `git cherry-pick` command enables you to pick specific commits from one branch and apply them to another branch. This command is useful for integrating particular changes without merging entire branch histories.
+## Workflow of JavaScript
 
-#### 13. **What are Git hooks?**
-Git hooks are scripts that Git executes before or after events such as committing changes, merging branches, pushing commits, and more. These hooks are customizable and can automate tasks, enforce policies, and integrate with external systems.
+**What is the workflow of JavaScript?**
 
-#### 14. **How can you return the names of people who are reported to (excluding null values), the number of members that report to them, and the average age of those members as an integer, ordered by names alphabetically?**
-To achieve this, you can write a SQL query that selects the `ReportsTo` column, counts the number of members reporting to each person, and calculates the average age. The query will group by `ReportsTo`, exclude null values, and order the results alphabetically by `ReportsTo`.
+JavaScript executes code in a single-threaded, non-blocking, event-driven environment. The typical workflow includes:
+- **Parsing and Compilation:** JavaScript code is parsed and compiled into machine code by the JavaScript engine.
+- **Execution Context Creation:** For each function or block of code, an execution context is created, which includes the scope chain, `this` context, and local variables.
+- **Execution:** Code is executed within the created execution context, including synchronous code execution and handling asynchronous operations using callbacks, promises, or async/await.
+- **Event Handling:** Event listeners are attached to elements, and when events occur, they are processed by the event loop.
 
-#### 15. **How can you find the first word with the greatest number of repeated letters in a string in JavaScript?**
-To find the first word with the greatest number of repeated letters in a string, split the string into words, define a function to count repeated letters in each word, and iterate through the words to determine which word has the highest count of repeated letters. Return the first word that meets this criterion.
+## Hoisting
 
----
+**What is hoisting in JavaScript?**
+
+Hoisting is a JavaScript behavior where variable and function declarations are moved to the top of their containing scope during the compilation phase. This means you can use variables and functions before they are declared in the code.
+
+- **Variables:** Only the declaration is hoisted, not the initialization. Accessing a variable before its initialization will result in `undefined`.
+  ```javascript
+  console.log(x); // undefined
+  var x = 5;
+  ```
+
+- **Functions:** Function declarations are fully hoisted, so you can call a function before its declaration.
+  ```javascript
+  greet(); // Outputs 'Hello!'
+  function greet() {
+    console.log('Hello!');
+  }
+  ```
+
+## Closure
+
+**What is a closure?**
+
+A closure is a function that retains access to its lexical scope even after the function has finished executing. Closures allow functions to remember the environment in which they were created.
+
+Example:
+```javascript
+function createCounter() {
+  let count = 0;
+  return function() {
+    count += 1;
+    return count;
+  };
+}
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+```
+
+## Event Delegation
+
+**What is event delegation?**
+
+Event delegation is a technique for handling events in a parent element rather than individual child elements. This is achieved by using event bubbling to catch events at a higher level.
+
+- **Benefits:** Reduces the number of event listeners attached, improves performance, and simplifies event management.
+- **Example:**
+  ```javascript
+  document.getElementById('parent').addEventListener('click', function(event) {
+    if (event.target && event.target.matches('button')) {
+      console.log('Button clicked!');
+    }
+  });
+  ```
+
+## Event Loop
+
+**What is the event loop?**
+
+The event loop is a mechanism in JavaScript that allows the execution of code, collection of events, and processing of messages. It handles asynchronous operations by managing the call stack and message queue.
+
+- **Call Stack:** Holds the currently executing function.
+- **Message Queue:** Holds messages (e.g., events, callbacks) that are waiting to be processed.
+- **Process:** When the call stack is empty, the event loop processes messages from the message queue.
+
+## Stack and Queue
+
+**What are stack and queue in JavaScript?**
+
+- **Stack:** A data structure that follows the Last In, First Out (LIFO) principle. JavaScript uses the call stack to manage function execution. Functions are pushed onto the stack and popped off as they complete.
+  ```javascript
+  function first() {
+    second();
+  }
+  function second() {
+    console.log('Second function');
+  }
+  first(); // Outputs 'Second function'
+  ```
+
+- **Queue:** A data structure that follows the First In, First Out (FIFO) principle. JavaScript uses the message queue to manage asynchronous tasks. Messages are processed in the order they are received.
+  ```javascript
+  setTimeout(() => {
+    console.log('Asynchronous task');
+  }, 0);
+  console.log('Synchronous task');
+  // Outputs 'Synchronous task' then 'Asynchronous task'
+  ```
+
+## Lexical Context
+
+**What is lexical context in JavaScript?**
+
+Lexical context refers to the environment in which a variable or function is defined. It includes the scope chain and determines variable accessibility. Lexical scoping ensures that functions have access to variables from their defining scope.
+
+Example:
+```javascript
+function outer() {
+  let outerVar = 'I am from outer';
+  function inner() {
+    console.log(outerVar); // Accesses variable from outer function
+  }
+  inner();
+}
+outer(); // Outputs 'I am from outer'
+```
+
+## First-Class Functions
+
+**What are first-class functions?**
+
+In JavaScript, functions are first-class citizens, meaning they can be:
+- **Assigned to Variables:** Functions can be stored in variables.
+  ```javascript
+  const greet = function() {
+    console.log('Hello!');
+  };
+  greet();
+  ```
+
+- **Passed as Arguments:** Functions can be passed as arguments to other functions.
+  ```javascript
+  function execute(fn) {
+    fn();
+  }
+  execute(() => console.log('Executed!'));
+  ```
+
+- **Returned from Functions:** Functions can be returned from other functions.
+  ```javascript
+  function createMultiplier(multiplier) {
+    return function(value) {
+      return value * multiplier;
+    };
+  }
+  const double = createMultiplier(2);
+  console.log(double(5)); // 10
+  ```
+
+## Execution Context
+
+**What is the execution context in JavaScript?**
+
+The execution context is an abstract environment in which JavaScript code is executed. It includes:
+- **Global Context:** The default context where code runs outside of any function.
+- **Function Context:** Created when a function is invoked, including its own variables, scope chain, and `this` binding.
+- **Eval Context:** Created when `eval()` is executed, which is generally avoided due to security concerns.
+
+Each context has its own scope chain and `this` binding.
+
+## JavaScript Asynchronous Working
+
+**How does asynchronous working function in JavaScript?**
+
+JavaScript handles asynchronous operations using:
+- **Callbacks:** Functions passed as arguments to other functions, which are executed once a task completes.
+  ```javascript
+  setTimeout(() => {
+    console.log('Callback executed');
+  }, 1000);
+  ```
+
+- **Promises:** Objects that represent the eventual completion (or failure) of an asynchronous operation.
+  ```javascript
+  new Promise((resolve, reject) => {
+    setTimeout(() => resolve('Promise resolved'), 1000);
+  }).then(console.log);
+  ```
+
+- **Async/Await:** Syntactic sugar over promises, allowing asynchronous code to be written in a synchronous-like manner.
+  ```javascript
+  async function fetchData() {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+  }
+  fetchData();
+  ```
+
+```
 
