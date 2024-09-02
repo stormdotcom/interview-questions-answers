@@ -22,19 +22,127 @@ libuv: The event loop in Node.js is powered by libuv, a C library that provides 
 
 Event Loop Phases: The event loop in Node.js has several phases that it goes through to manage asynchronous operations. The major phases are:
 
-Timers: This phase executes callbacks scheduled by setTimeout() and setInterval().
+- Timers: This phase executes callbacks scheduled by setTimeout() and setInterval().
 
-Pending Callbacks: Executes I/O callbacks deferred to the next loop iteration.
+- Pending Callbacks: Executes I/O callbacks deferred to the next loop iteration.
 
-Idle, Prepare: Used internally by Node.js for performance optimization.
+- Idle, Prepare: Used internally by Node.js for performance optimization.
 
-Poll: This phase retrieves new I/O events; node will block here when appropriate.
+- Poll: This phase retrieves new I/O events; node will block here when appropriate.
 
-Check: Executes setImmediate() callbacks.
+- Check: Executes setImmediate() callbacks.
 
-Close Callbacks: Executes callbacks for closed connections, such as socket.on('close', ...).
+- Close Callbacks: Executes callbacks for closed connections, such as socket.on('close', ...).
 
 During each iteration, the event loop checks for pending callbacks and executes them in their respective phase. The non-blocking nature of Node.js comes from the fact that it doesn't wait for a function to complete; instead, it registers a callback and moves on to the next task.
+
+### Worker Threads in Node.js
+
+Node.js introduces worker threads to perform parallel execution of JavaScript code. This is particularly useful for CPU-intensive tasks, which can block the event loop if executed in the main thread.
+
+#### How Many Worker Threads Are Available?
+
+By default, Node.js uses a thread pool with 4 threads for handling operations like asynchronous I/O tasks via `libuv` (used internally by Node.js). However, when using the `worker_threads` module, each worker thread is a separate JavaScript thread running in parallel, not limited by the default thread pool size. You can create as many worker threads as your system resources (CPU and memory) allow, but practical limits depend on your application's needs and the hardware.
+
+### Methods and Classes in `worker_threads`
+
+The `worker_threads` module in Node.js provides a set of methods and classes to create and manage worker threads. Here are the key components:
+
+1. **`Worker` Class**: This class represents an individual worker thread. Each worker runs in its own V8 instance with a separate event loop, allowing for true parallelism in Node.js.
+
+2. **`isMainThread` Property**: A boolean value indicating if the current script is running in the main thread or in a worker thread.
+
+3. **`parentPort` Property**: The `MessagePort` used for communication with the parent thread (i.e., the main thread). This is available inside a worker thread.
+
+4. **`workerData` Property**: This property is used to pass data to the worker thread when it is created. It's a read-only object available only inside a worker thread.
+
+5. **`MessageChannel` Class**: This provides a way to create two-way communication channels (`MessagePort` objects) that can be used to pass messages between threads.
+
+6. **`MessagePort` Class**: Represents one side of a two-way communication channel established by `MessageChannel`.
+
+### How to Implement Worker Threads
+
+To implement worker threads in Node.js, you'll follow these steps:
+
+1. **Create a Worker Thread**: Use the `Worker` class to spawn a new thread.
+2. **Pass Data to the Worker**: Use the `workerData` option to send initial data to the worker.
+3. **Communicate Between Main and Worker Threads**: Use `postMessage()` and the `message` event to send and receive messages between threads.
+4. **Handle Errors**: Set up error handlers to manage errors within worker threads.
+
+Here’s an example implementation:
+
+#### Step-by-Step Example
+
+**Step 1: Install Required Modules**
+
+You need Node.js version 10.5.0 or later to use `worker_threads`.
+
+**Step 2: Create a Worker Thread**
+
+Create two files: `main.js` (the main thread) and `worker.js` (the worker thread).
+
+**`main.js` (Main Thread):**
+
+```javascript
+const { Worker, isMainThread, workerData } = require("worker_threads");
+
+if (isMainThread) {
+  // This is the main thread
+
+  // Create a new worker thread
+  const worker = new Worker(__filename, {
+    workerData: { number: 5 },
+  });
+
+  // Listen for messages from the worker
+  worker.on("message", (result) => {
+    console.log(`Result from worker: ${result}`);
+  });
+
+  // Listen for errors from the worker
+  worker.on("error", (error) => {
+    console.error("Error from worker:", error);
+  });
+
+  // Listen for worker exit
+  worker.on("exit", (code) => {
+    if (code !== 0) {
+      console.error(`Worker stopped with exit code ${code}`);
+    }
+  });
+} else {
+  // This is the worker thread
+
+  // Import necessary modules
+  const { workerData, parentPort } = require("worker_threads");
+
+  // Perform the task (e.g., calculate factorial)
+  const calculateFactorial = (n) => {
+    if (n === 0) return 1;
+    return n * calculateFactorial(n - 1);
+  };
+
+  // Perform the computation and send the result back to the main thread
+  const result = calculateFactorial(workerData.number);
+  parentPort.postMessage(result);
+}
+```
+
+**Step 3: Run the Main Thread Script**
+
+Run `main.js` with Node.js:
+
+```bash
+node main.js
+```
+
+**Explanation:**
+
+1. **`isMainThread`**: This boolean checks whether the current execution context is the main thread or a worker thread.
+2. **`Worker` Class**: We create a new worker using `new Worker(__filename, {...})`, where `__filename` refers to the same file (`main.js`). This allows the worker to run a section of the script only meant for worker execution.
+3. **`workerData`**: This object is passed to the worker thread when it is created, allowing initial data transfer.
+4. **`parentPort.postMessage()`**: In the worker thread, `parentPort` is used to send messages back to the main thread. Here, the factorial calculation result is sent back.
+5. **`worker.on()`**: In the main thread, various listeners handle messages, errors, and exit codes from the worker thread.
 
 ## 1. User System Workflow
 
