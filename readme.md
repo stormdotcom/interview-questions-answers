@@ -761,3 +761,345 @@ In arrow functions, the `this` keyword does not refer to the function itself as 
 ```
 
 ```
+
+Sure! Here's the question and answer in Markdown format:
+
+````markdown
+### Question
+
+Given the following JavaScript code:
+
+```javascript
+function b() {
+  setTimeout(() => console.log("inside b"), 2000);
+}
+
+function a() {
+  console.log("inside a");
+
+  b();
+  console.log("ended");
+}
+
+a();
+```
+````
+
+How can you modify the code to print the output in the order:
+
+```
+inside a
+inside b
+ended
+```
+
+without changing the function definitions of `a` or `b`?
+
+### Answer
+
+To achieve the desired output order without changing the function definitions of `a` or `b`, you can use Promises to control the execution flow. Here's how you can modify the code:
+
+```javascript
+function b() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("inside b");
+      resolve();
+    }, 2000);
+  });
+}
+
+async function a() {
+  console.log("inside a");
+
+  await b();
+  console.log("ended");
+}
+
+a();
+```
+
+#### Explanation:
+
+1. **Promise in `b()`**: The `b()` function is modified to return a `Promise`. When `setTimeout` completes, it logs "inside b" and then calls `resolve()` to indicate that the `Promise` is resolved.
+
+2. **`async` in `a()`**: The `a()` function is modified to be `async`, allowing the use of `await` to pause the execution until `b()` is completed.
+
+3. **`await b()`**: This ensures that `console.log("ended")` is executed only after the `b()` function's `Promise` is resolved, guaranteeing the desired order of outputs.
+
+#### Output:
+
+The modified code will print:
+
+```
+inside a
+inside b
+ended
+```
+
+This approach maintains the original structure of `function a` and `function b` but uses Promises to manage asynchronous behavior effectively.
+
+```
+
+```
+
+Here are some similar JavaScript interview questions related to asynchronous behavior, Promises, `async/await`, and execution order:
+
+### 1. **Order of Execution with `setTimeout` and Promises**
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout 1");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise 1");
+});
+
+setTimeout(() => {
+  console.log("Timeout 2");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise 2");
+});
+
+console.log("End");
+```
+
+**Question:** What is the order of the console logs? Explain why.
+
+#### **Answer:**
+
+The output will be:
+
+```
+Start
+End
+Promise 1
+Promise 2
+Timeout 1
+Timeout 2
+```
+
+**Explanation:**
+
+- JavaScript is single-threaded and uses an event loop to handle asynchronous operations.
+- **"Start"** is logged first.
+- The `setTimeout` callbacks are added to the macrotask queue and will be executed later.
+- Promises are part of the microtask queue, which has a higher priority than the macrotask queue. So, **"Promise 1"** and **"Promise 2"** will be logged before the `setTimeout` callbacks.
+- Finally, **"Timeout 1"** and **"Timeout 2"** will be executed in order once the call stack is empty.
+
+---
+
+### 2. **Using `async/await` with Error Handling**
+
+```javascript
+async function fetchData() {
+  throw new Error("Network Error");
+}
+
+async function getData() {
+  try {
+    await fetchData();
+    console.log("Data fetched successfully");
+  } catch (error) {
+    console.log("Error occurred:", error.message);
+  }
+}
+
+getData();
+```
+
+**Question:** What will be printed to the console? Why?
+
+#### **Answer:**
+
+The output will be:
+
+```
+Error occurred: Network Error
+```
+
+**Explanation:**
+
+- The `fetchData` function throws an error when called.
+- When `await fetchData()` is executed, the `Error` is thrown, and the control is immediately transferred to the `catch` block.
+- The `catch` block catches the error and logs **"Error occurred: Network Error"** to the console.
+
+---
+
+### 3. **Chaining Promises and Execution Order**
+
+```javascript
+function asyncTask(message, delay) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(message);
+      resolve();
+    }, delay);
+  });
+}
+
+asyncTask("Task 1", 1000)
+  .then(() => asyncTask("Task 2", 500))
+  .then(() => asyncTask("Task 3", 300))
+  .then(() => console.log("All tasks completed"));
+```
+
+**Question:** What will be the order of console logs, and how long will it take to complete all tasks?
+
+#### **Answer:**
+
+The order of the console logs will be:
+
+```
+Task 1
+Task 2
+Task 3
+All tasks completed
+```
+
+**Explanation:**
+
+- **"Task 1"** is logged after 1 second (1000 milliseconds).
+- The next `then` block waits for **"Task 2"** to finish after 500 milliseconds.
+- After that, **"Task 3"** will be logged after 300 milliseconds.
+- Finally, **"All tasks completed"** is logged.
+- The total time taken will be 1000ms + 500ms + 300ms = **1800 milliseconds**.
+
+---
+
+### 4. **Understanding `Promise` Constructor and `then` Method**
+
+```javascript
+const p = new Promise((resolve, reject) => {
+  console.log("Promise started");
+  resolve("Resolved value");
+});
+
+p.then((res) => {
+  console.log(res);
+});
+
+console.log("Promise created");
+```
+
+**Question:** What will be the output of the above code, and in what order?
+
+#### **Answer:**
+
+The output will be:
+
+```
+Promise started
+Promise created
+Resolved value
+```
+
+**Explanation:**
+
+- **"Promise started"** is printed first when the `Promise` constructor is executed.
+- **"Promise created"** is printed next, right after the `Promise` is created.
+- The `then` method is added to the microtask queue. Once the synchronous code is finished, **"Resolved value"** is logged.
+
+---
+
+### 5. **Combining `async/await` with Multiple Promises**
+
+```javascript
+async function asyncTask1() {
+  console.log("Task 1 started");
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  console.log("Task 1 completed");
+}
+
+async function asyncTask2() {
+  console.log("Task 2 started");
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log("Task 2 completed");
+}
+
+async function main() {
+  console.log("Main started");
+  await asyncTask1();
+  await asyncTask2();
+  console.log("Main completed");
+}
+
+main();
+```
+
+**Question:** What will be the output of this code, and how long will it take to execute completely?
+
+#### **Answer:**
+
+The output will be:
+
+```
+Main started
+Task 1 started
+Task 1 completed
+Task 2 started
+Task 2 completed
+Main completed
+```
+
+**Explanation:**
+
+- **"Main started"** is printed first.
+- **`asyncTask1`** starts and waits for 2 seconds.
+- After 2 seconds, **"Task 1 completed"** is printed.
+- **`asyncTask2`** starts and waits for 1 second.
+- After 1 second, **"Task 2 completed"** is printed.
+- Finally, **"Main completed"** is printed.
+- Total time: 2 seconds (for `asyncTask1`) + 1 second (for `asyncTask2`) = **3 seconds**.
+
+---
+
+### 6. **Mixing `setTimeout` and `Promise` Chaining**
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+Promise.resolve()
+  .then(() => {
+    console.log("Promise 1");
+  })
+  .then(() => {
+    console.log("Promise 2");
+  });
+
+console.log("End");
+```
+
+**Question:** What is the output of the above code and why?
+
+#### **Answer:**
+
+The output will be:
+
+```
+Start
+End
+Promise 1
+Promise 2
+Timeout
+```
+
+**Explanation:**
+
+- **"Start"** is logged first.
+- The `setTimeout` callback is added to the macrotask queue.
+- The first `Promise` is resolved immediately and **"Promise 1"** is added to the microtask queue.
+- **"End"** is logged after the synchronous code completes.
+- Microtasks are processed next, so **"Promise 1"** and **"Promise 2"** are logged.
+- Finally, the `setTimeout` callback is executed, logging **"Timeout"**.
+
+These types of questions help test the understanding of JavaScript's asynchronous behavior, the event loop, the microtask vs. macrotask queue, and the correct use of `Promises` and `async/await`.
