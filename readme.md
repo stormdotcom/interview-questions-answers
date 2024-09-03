@@ -845,7 +845,7 @@ This approach maintains the original structure of `function a` and `function b` 
 
 Here are some similar JavaScript interview questions related to asynchronous behavior, Promises, `async/await`, and execution order:
 
-### 1. **Order of Execution with `setTimeout` and Promises**
+###  **Order of Execution with `setTimeout` and Promises**
 
 ```javascript
 console.log("Start");
@@ -894,7 +894,7 @@ Timeout 2
 
 ---
 
-### 2. **Using `async/await` with Error Handling**
+###  **Using `async/await` with Error Handling**
 
 ```javascript
 async function fetchData() {
@@ -972,7 +972,7 @@ All tasks completed
 
 ---
 
-### 4. **Understanding `Promise` Constructor and `then` Method**
+### **Understanding `Promise` Constructor and `then` Method**
 
 ```javascript
 const p = new Promise((resolve, reject) => {
@@ -1007,7 +1007,7 @@ Resolved value
 
 ---
 
-### 5. **Combining `async/await` with Multiple Promises**
+### **Combining `async/await` with Multiple Promises**
 
 ```javascript
 async function asyncTask1() {
@@ -1059,7 +1059,7 @@ Main completed
 
 ---
 
-### 6. **Mixing `setTimeout` and `Promise` Chaining**
+###  **Mixing `setTimeout` and `Promise` Chaining**
 
 ```javascript
 console.log("Start");
