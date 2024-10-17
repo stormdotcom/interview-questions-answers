@@ -1,7 +1,3 @@
-# Handling High-Throughput Invoice Generation While Preserving Sequential Order
-
-## Question
-
 **How do we preserve the sequential order of invoice requests in a high-load e-commerce system?**
 
 Let's say we have an e-commerce platform. Once a purchase is completed, we need to generate an invoice and send it to the client. Suppose we have 500 invoice generation requests per second. How can we design a system that can handle this load as quickly as possible, ensuring that even the 500th client doesn't have to wait too long?
