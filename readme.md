@@ -10,7 +10,9 @@
 
 ### [NextJS Interview Questions ](./NextJS.md)
 
-### [NodeJS Interview Questions ](./NodeJS.md)
+### [DataBase SQL](./DataBase SQL.md)
+
+### [AWS-Lambda ](./AWS-Lambda.md)
 
 ### [AWS S3 ](./AWS-S3.md)
 
