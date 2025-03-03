@@ -1,6 +1,4 @@
-Below is a focused study plan in Markdown format designed to cover core C# and .NET concepts in the few hours you have before your interview. This plan emphasizes high-level topics and hands-on exercises so you can build confidence quickly.
-
----
+Below is a focused study plan in Markdown format designed to cover core C# and .NET
 
 # C# & .NET Quick Study Plan
 
