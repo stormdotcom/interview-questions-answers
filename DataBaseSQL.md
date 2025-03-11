@@ -1,4 +1,4 @@
-###  SQL and Database Questions with Answers
+### SQL and Database Questions with Answers
 
 #### 1. **What is the cardinality between library members and books in a library system where each book can be borrowed by multiple members, but each member can borrow only one copy of a book at a time?**
 
@@ -39,6 +39,7 @@
 #### 7. **Write an SQL query to retrieve distinct product categories with a quantity in stock less than 100. Include only those categories and order the result alphabetically.**
 
 **Query:**
+
 ```sql
 SELECT DISTINCT category
 FROM ProductInventory
@@ -51,6 +52,7 @@ ORDER BY category ASC;
 #### 8. **Find customers who have made at least 2 orders. Retrieve their first name and the total money spent (money_spent) and order by `money_spent` in descending order.**
 
 **Query:**
+
 ```sql
 SELECT c.first_name, SUM(p.price * o.qty) AS money_spent
 FROM Customers c
@@ -66,6 +68,7 @@ ORDER BY money_spent DESC;
 #### 9. **Calculate the profit margin for each product and order results by `profit_margin` in descending order.**
 
 **Query:**
+
 ```sql
 SELECT sale_id, product_name, cost_price, selling_price,
        ROUND(((selling_price - cost_price) / cost_price) * 100, 4) AS profit_margin
@@ -78,6 +81,7 @@ ORDER BY profit_margin DESC;
 #### 10. **Find the youngest voter for each candidate and order the result alphabetically by candidate name and voter name.**
 
 **Query:**
+
 ```sql
 SELECT c.candidate_name, v.voter_name AS youngest_voter
 FROM Votes vt
@@ -97,6 +101,7 @@ ORDER BY c.candidate_name, youngest_voter;
 #### 11. **Find the department names where the maximum bonus is less than the average bonus across all departments.**
 
 **Query:**
+
 ```sql
 WITH DepartmentMaxBonus AS (
     SELECT e.department_id, MAX(b.bonus_amount) AS max_bonus
@@ -120,6 +125,7 @@ WHERE dmb.max_bonus < ab.avg_bonus;
 #### 12. **Find the employee with the highest salary in each department and return results ordered by `department_id`.**
 
 **Query:**
+
 ```sql
 SELECT e.first_name, e.last_name, e.salary, e.department_id
 FROM Employees e
@@ -136,6 +142,7 @@ ORDER BY e.department_id ASC;
 #### 13. **Write an SQL query to fetch all customers who bought a specific product and return their names.**
 
 **Query:**
+
 ```sql
 SELECT DISTINCT c.first_name, c.last_name
 FROM Customers c
@@ -149,6 +156,7 @@ WHERE p.name = 'Specific Product';
 #### 14. **Retrieve all products with prices either above 50 or below 30, starting from the fourth matching product, and display 3 such products.**
 
 **Query:**
+
 ```sql
 SELECT *
 FROM Products
@@ -162,6 +170,7 @@ LIMIT 3 OFFSET 3;
 #### 15. **Find the total bonus amount for each department ordered by department ID.**
 
 **Query:**
+
 ```sql
 SELECT d.department_id, d.department_name, SUM(b.bonus_amount) AS total_bonus
 FROM Departments d
@@ -176,6 +185,7 @@ ORDER BY d.department_id;
 #### 16. **Find customers who didn’t place any orders and list their names.**
 
 **Query:**
+
 ```sql
 SELECT c.first_name, c.last_name
 FROM Customers c
@@ -188,6 +198,7 @@ WHERE o.id IS NULL;
 #### 17. **Write an SQL query to retrieve all product categories that have a total stock quantity of more than 500.**
 
 **Query:**
+
 ```sql
 SELECT category
 FROM ProductInventory
@@ -200,6 +211,7 @@ HAVING SUM(quantity_in_stock) > 500;
 #### 18. **Fetch all employees earning a salary above the average salary in their department.**
 
 **Query:**
+
 ```sql
 SELECT e.first_name, e.last_name, e.salary, e.department_id
 FROM Employees e
@@ -216,6 +228,7 @@ WHERE e.salary > avg_salaries.avg_salary;
 #### 19. **Retrieve the most expensive product in each category.**
 
 **Query:**
+
 ```sql
 SELECT category, product_name, MAX(price) AS max_price
 FROM Products
@@ -227,6 +240,7 @@ GROUP BY category;
 #### 20. **Find duplicate customer records based on their email address.**
 
 **Query:**
+
 ```sql
 SELECT email, COUNT(*) AS occurrences
 FROM Customers
@@ -234,4 +248,44 @@ GROUP BY email
 HAVING COUNT(*) > 1;
 ```
 
---- 
+---
+
+**Question:**  
+How can you find duplicate emails along with their associated first names in a SQL table named `users` with columns `id, email, firstName, lastName, phoneNumber`?
+
+**Answer:**  
+You can use a subquery to identify emails that appear more than once, and then select rows with those emails. Here's an example SQL query that accomplishes this:
+
+```sql
+SELECT email, firstName
+FROM users
+WHERE email IN (
+  SELECT email
+  FROM users
+  GROUP BY email
+  HAVING COUNT(*) > 1
+)
+ORDER BY email;
+```
+
+**Explanation:**
+
+- **Subquery:**
+
+  ```sql
+  SELECT email
+  FROM users
+  GROUP BY email
+  HAVING COUNT(*) > 1
+  ```
+
+  This subquery groups the rows by the `email` field and filters out those groups that have a count greater than one, which identifies duplicate emails.
+
+- **Main Query:**
+  ```sql
+  SELECT email, firstName
+  FROM users
+  WHERE email IN ( ... )
+  ORDER BY email;
+  ```
+  The main query selects the `email` and `firstName` from the `users` table where the email exists in the list of duplicate emails provided by the subquery. The results are then ordered by email for easier review.

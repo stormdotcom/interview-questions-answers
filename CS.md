@@ -1,12 +1,5 @@
 Below is a focused study plan in Markdown format designed to cover core C# and .NET
 
-# C# & .NET Quick Study Plan
-
-**Interview Time:** 10 AM tomorrow  
-**Total Study Time:** Approximately 6-8 hours
-
----
-
 ## 1. Environment Setup (15 minutes)
 
 - **Install & Verify:**
