@@ -1,6 +1,4 @@
-Here are the **notes in Markdown (`.md`) format**:
 
-````md
 # QuadTree and Nearest Neighbors
 
 ## QuadTree
@@ -90,7 +88,7 @@ Each node stores:
   WHERE lat < x + k AND lat > x - k
   AND long < y + k AND long > y - k;
   ```
-````
+
 
 - **Issues:**
   - Choosing the right **`k`** (bounding distance) is difficult.
