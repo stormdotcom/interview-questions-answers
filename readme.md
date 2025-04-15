@@ -93,7 +93,6 @@ function curry(fn) {
   };
 }
 
-// Usage
 function add(a, b, c) {
   return a + b + c;
 }
@@ -119,7 +118,6 @@ function deepFlatten(arr) {
   );
 }
 
-// Usage
 const nestedArray = [1, [2, [3, 4], 5], 6];
 console.log(deepFlatten(nestedArray)); // [1, 2, 3, 4, 5, 6]
 ```
