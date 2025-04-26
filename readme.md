@@ -1105,3 +1105,13 @@ Timeout
 - Finally, the `setTimeout` callback is executed, logging **"Timeout"**.
 
 These types of questions help test the understanding of JavaScript's asynchronous behavior, the event loop, the microtask vs. macrotask queue, and the correct use of `Promises` and `async/await`.
+
+
+function sayHello() { 
+  setTimeout(() => {
+    return "Hello";
+  }, 100);
+}
+
+console.log(sayHello());
+
