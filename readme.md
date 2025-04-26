@@ -25,15 +25,16 @@ Implement a debounce function that delays the processing of the input function u
 
 **Code:**
 
-```javascript
-function debounce(func, wait) {
-  let timeout;
-  return function (...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
+function sayHello() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("Hello");
+    }, 100);
+  });
 }
+
+sayHello().then((msg) => console.log(msg));
+
 
 // Usage
 const debouncedFunction = debounce(() => console.log("Debounced!"), 300);
