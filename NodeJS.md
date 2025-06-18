@@ -1,6 +1,33 @@
-# Interview Questions and Answers
+# Node.js Interview Questions and Answers
 
-## Node.js Overview:
+## Table of Contents
+
+1. [Node.js Overview](#1-nodejs-overview)
+2. [User System Workflow](#2-user-system-workflow)
+3. [Authentication](#3-authentication)
+4. [Refresh Token](#4-refresh-token)
+5. [Middleware](#5-middleware)
+6. [Asynchronous vs Synchronous Functions](#6-asynchronous-vs-synchronous-functions)
+7. [Array Iterators](#7-array-iterators)
+8. [MongoDB Aggregations](#8-mongodb-aggregations)
+9. [Sequelize](#9-sequelize)
+10. [Types of Relationships in RDBMS](#10-types-of-relationships-in-rdbms)
+11. [Latency vs Throughput](#11-latency-vs-throughput)
+12. [Raw Query vs ORM](#12-raw-query-vs-orm)
+13. [Normalization and Normal Forms](#13-normalization-and-normal-forms)
+14. [Git Hooks](#14-git-hooks)
+15. [SQL Query Example](#15-sql-query-example)
+16. [Clustering in Node.js](#16-clustering-in-nodejs)
+17. [Worker Threads in Node.js](#17-worker-threads-in-nodejs)
+18. [Child Process in Node.js](#18-child-process-in-nodejs)
+19. [Comparison: Cluster vs Worker Threads vs Child Process](#19-comparison-cluster-vs-worker-threads-vs-child-process)
+20. [Memory Sharing in Node.js](#20-memory-sharing-in-nodejs)
+21. [Detecting Memory Leaks in Node.js](#21-detecting-memory-leaks-in-nodejs)
+22. [Debugger and Debugging in Node.js](#22-debugger-and-debugging-in-nodejs)
+
+---
+
+## 1. Node.js Overview
 
 Node.js is a popular server-side technology that allows developers to use JavaScript, which was traditionally a client-side scripting language, on the server side as well. It is built on the V8 JavaScript engine, developed by Google, which compiles JavaScript directly into machine code, making Node.js applications fast and efficient.
 
@@ -69,7 +96,7 @@ To implement worker threads in Node.js, you'll follow these steps:
 3. **Communicate Between Main and Worker Threads**: Use `postMessage()` and the `message` event to send and receive messages between threads.
 4. **Handle Errors**: Set up error handlers to manage errors within worker threads.
 
-Here’s an example implementation:
+Here's an example implementation:
 
 #### Step-by-Step Example
 
@@ -144,7 +171,7 @@ node main.js
 4. **`parentPort.postMessage()`**: In the worker thread, `parentPort` is used to send messages back to the main thread. Here, the factorial calculation result is sent back.
 5. **`worker.on()`**: In the main thread, various listeners handle messages, errors, and exit codes from the worker thread.
 
-## 1. User System Workflow
+## 2. User System Workflow
 
 **Q:** What is the typical workflow of a user system?
 
@@ -156,7 +183,7 @@ node main.js
 - **Session Management:** Maintains user sessions using cookies or tokens to keep users logged in.
 - **Logout:** Ends the user's session and invalidates any tokens or session data.
 
-## 2. Authentication
+## 3. Authentication
 
 **Q:** What is authentication?
 
@@ -166,7 +193,7 @@ node main.js
 - **Multi-Factor Authentication (MFA):** Adds an extra layer of security by requiring additional verification (e.g., SMS code, email verification).
 - **OAuth:** A framework for token-based authentication allowing users to grant third-party applications access without sharing their credentials.
 
-## 3. Refresh Token
+## 4. Refresh Token
 
 **Q:** What is a refresh token?
 
@@ -176,7 +203,7 @@ node main.js
 - **Access Token Expiry:** When the access token expires, the refresh token can be sent to the server to get a new access token.
 - **Security:** Refresh tokens should be securely stored and protected, as they can be used to issue new access tokens.
 
-## 4. Middleware
+## 5. Middleware
 
 **Q:** What is middleware?
 
@@ -196,7 +223,7 @@ app.use((req, res, next) => {
 });
 ```
 
-## 5. Asynchronous vs Synchronous Functions
+## 6. Asynchronous vs Synchronous Functions
 
 **Q:** What is the difference between asynchronous and synchronous functions?
 
@@ -222,7 +249,7 @@ app.use((req, res, next) => {
   asyncFunction(); // Outputs 'First', then 'Second' after 1 second
   ```
 
-## 6. Array Iterators
+## 7. Array Iterators
 
 **Q:** What are some common array iterators in JavaScript?
 
@@ -251,7 +278,7 @@ app.use((req, res, next) => {
   const sum = [1, 2, 3].reduce((acc, num) => acc + num, 0); // 6
   ```
 
-## 7. MongoDB Aggregations
+## 8. MongoDB Aggregations
 
 **Q:** What are MongoDB aggregations?
 
@@ -272,7 +299,7 @@ db.collection.aggregate([
 ]);
 ```
 
-## 8. Sequelize
+## 9. Sequelize
 
 **Q:** What is Sequelize?
 
@@ -300,7 +327,7 @@ db.collection.aggregate([
   Post.belongsTo(User);
   ```
 
-## 9. Types of Relationships in RDBMS
+## 10. Types of Relationships in RDBMS
 
 **Q:** What are the types of relationships in a relational database management system (RDBMS)?
 
@@ -310,7 +337,7 @@ db.collection.aggregate([
 - **One-to-Many (1:N):** A row in Table A can be related to multiple rows in Table B, but each row in Table B is related to only one row in Table A. Example: A department can have many employees, but each employee belongs to only one department.
 - **Many-to-Many (M:N):** Rows in Table A can be related to multiple rows in Table B and vice versa. This is typically implemented using a junction table that contains foreign keys referencing both Table A and Table B. Example: Students and courses, where each student can enroll in multiple courses and each course can have multiple students.
 
-## 10. Latency vs Throughput
+## 11. Latency vs Throughput
 
 **Q:** What is the difference between latency and throughput?
 
@@ -319,7 +346,7 @@ db.collection.aggregate([
 - **Latency:** Measures the time it takes to process a single request or operation from start to finish. It is often referred to as "response time" and is crucial for applications where quick responses are needed. Example: The time taken for a web page to load.
 - **Throughput:** Measures the number of requests or operations processed in a given amount of time. It indicates the capacity of a system to handle a load and is crucial for performance in high-load scenarios. Example: The number of transactions processed per second in a database.
 
-## 11. Raw Query vs ORM
+## 12. Raw Query vs ORM
 
 **Q:** When do we use raw queries, and when do we use an ORM (Object-Relational Mapping)?
 
@@ -341,7 +368,7 @@ db.collection.aggregate([
 
   In most cases, ORMs are used because they simplify code and reduce the likelihood of errors. However, raw queries are preferred for performance optimizations or complex operations.
 
-## 12. Normalization and Normal Forms
+## 13. Normalization and Normal Forms
 
 **Q:** How do you normalize a database, and what are the three types of normal forms?
 
@@ -387,6 +414,122 @@ ORDER BY ReportsTo;
 
 This query selects the `ReportsTo` column, counts the number of members reporting to each person, calculates the average age (rounded down to the nearest integer), excludes null values, and orders the results alphabetically by `ReportsTo`.
 
+## 16. Clustering in Node.js
+**Q:** What is clustering in Node.js and when should you use it?
+
+**A:**
+Clustering allows you to create child processes (workers) that share the same server port. Each worker runs on a separate Node.js process, enabling you to take advantage of multi-core systems and handle more concurrent connections.
+
+**Example:**
+```javascript
+const cluster = require('cluster');
+const http = require('http');
+const numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`Worker ${worker.process.pid} died`);
+  });
+} else {
+  http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('Hello from worker ' + process.pid);
+  }).listen(8000);
+}
 ```
 
+## 17. Worker Threads in Node.js
+**Q:** What are Worker Threads in Node.js and when should you use them?
+
+**A:**
+Worker Threads allow JavaScript to run code in parallel on multiple threads, which is especially useful for CPU-intensive tasks. Each worker thread runs in its own V8 instance and event loop. Communication is done via message passing.
+
+**Example:**
+```javascript
+const { Worker, isMainThread, parentPort } = require('worker_threads');
+
+if (isMainThread) {
+  const worker = new Worker(__filename);
+  worker.on('message', (msg) => console.log('From worker:', msg));
+  worker.postMessage('Hello from main thread');
+} else {
+  parentPort.on('message', (msg) => {
+    parentPort.postMessage('Received: ' + msg);
+  });
+}
+```
+
+## 18. Child Process in Node.js
+**Q:** What is the Child Process module in Node.js and how is it used?
+
+**A:**
+The `child_process` module allows you to spawn new processes to execute commands or run scripts. Useful for running shell commands, scripts, or CPU-intensive tasks outside the main event loop.
+
+**Example:**
+```javascript
+const { exec } = require('child_process');
+exec('ls -l', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.error(`stderr: ${stderr}`);
+});
+```
+
+## 19. Comparison: Cluster vs Worker Threads vs Child Process
+**Q:** Compare Clustering, Worker Threads, and Child Process in Node.js.
+
+| Feature         | Cluster                | Worker Threads         | Child Process           |
+|-----------------|------------------------|------------------------|-------------------------|
+| Process Model   | Multiple Node.js procs | Multiple threads (V8)  | Separate OS processes   |
+| Memory Sharing  | No (separate procs)    | Yes (via SharedArrayBuffer) | No (separate procs)    |
+| Communication   | IPC (message passing)  | Message passing, SharedArrayBuffer | IPC, stdio, message passing |
+| Use Case        | Scale HTTP servers     | CPU-intensive JS tasks | Run shell commands, scripts |
+| Overhead        | High                   | Low/Medium             | High                    |
+
+- **Cluster**: Best for scaling network servers across CPU cores.
+- **Worker Threads**: Best for parallelizing CPU-bound JavaScript tasks.
+- **Child Process**: Best for running external programs or scripts.
+
+## 20. Memory Sharing in Node.js
+**Q:** How is memory shared between Cluster, Worker Threads, and Child Process?
+
+**A:**
+- **Cluster**: Each worker is a separate process with its own memory. No direct memory sharing.
+- **Worker Threads**: Threads can share memory using `SharedArrayBuffer` and `Atomics`.
+- **Child Process**: Each child is a separate process with its own memory. No direct memory sharing.
+
+## 21. Detecting Memory Leaks in Node.js
+**Q:** How do you detect memory leaks in Node.js?
+
+**A:**
+- Use the `--inspect` or `--inspect-brk` flag to start Node.js with debugging enabled.
+- Use Chrome DevTools or Visual Studio Code to connect to the process and take heap snapshots.
+- Monitor memory usage with `process.memoryUsage()`.
+- Use tools like `clinic.js`, `heapdump`, or `memwatch-next` for advanced analysis.
+- Look for increasing memory usage over time, uncollected objects, or event listeners that are never removed.
+
+## 22. Debugger and Debugging in Node.js
+**Q:** How do you debug Node.js applications?
+
+**A:**
+- Use `console.log()` for simple debugging.
+- Start Node.js with `node --inspect` or `node --inspect-brk` to enable debugging.
+- Open Chrome DevTools (`chrome://inspect`) or use Visual Studio Code's built-in debugger.
+- Set breakpoints, step through code, inspect variables, and watch expressions.
+- Use the built-in `debugger` statement in your code to pause execution.
+
+**Example:**
+```javascript
+function buggyFunction() {
+  let a = 1;
+  debugger; // Execution will pause here if a debugger is attached
+  let b = 2;
+  return a + b;
+}
 ```
