@@ -28,23 +28,19 @@
 ### 1. Debounce Function
 **Question:** Implement a debounce function that delays the processing of the input function until after a specified wait time has elapsed since the last time the debounce function was invoked.
 
-function sayHello() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve("Hello");
-    }, 100);
-  });
+```javascript
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
 }
-<<<<<<< HEAD
-=======
-
-sayHello().then((msg) => console.log(msg));
-
 
 // Usage
 const debouncedFunction = debounce(() => console.log("Debounced!"), 300);
 window.addEventListener("resize", debouncedFunction);
->>>>>>> cb8bd2d4920408076fbd838bc16817395e033db8
 ```
 
 ---
