@@ -28,15 +28,23 @@
 ### 1. Debounce Function
 **Question:** Implement a debounce function that delays the processing of the input function until after a specified wait time has elapsed since the last time the debounce function was invoked.
 
-```javascript
-function debounce(func, wait) {
-  let timeout;
-  return function (...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
+function sayHello() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("Hello");
+    }, 100);
+  });
 }
+<<<<<<< HEAD
+=======
+
+sayHello().then((msg) => console.log(msg));
+
+
+// Usage
+const debouncedFunction = debounce(() => console.log("Debounced!"), 300);
+window.addEventListener("resize", debouncedFunction);
+>>>>>>> cb8bd2d4920408076fbd838bc16817395e033db8
 ```
 
 ---
@@ -261,3 +269,144 @@ if (isMainThread) {
 ---
 
 # End of Questions
+### **Understanding `Promise` Constructor and `then` Method**
+
+```javascript
+const p = new Promise((resolve, reject) => {
+  console.log("Promise started");
+  resolve("Resolved value");
+});
+
+p.then((res) => {
+  console.log(res);
+});
+
+console.log("Promise created");
+```
+
+**Question:** What will be the output of the above code, and in what order?
+
+#### **Answer:**
+
+The output will be:
+
+```
+Promise started
+Promise created
+Resolved value
+```
+
+**Explanation:**
+
+- **"Promise started"** is printed first when the `Promise` constructor is executed.
+- **"Promise created"** is printed next, right after the `Promise` is created.
+- The `then` method is added to the microtask queue. Once the synchronous code is finished, **"Resolved value"** is logged.
+
+---
+
+### **Combining `async/await` with Multiple Promises**
+
+```javascript
+async function asyncTask1() {
+  console.log("Task 1 started");
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  console.log("Task 1 completed");
+}
+
+async function asyncTask2() {
+  console.log("Task 2 started");
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log("Task 2 completed");
+}
+
+async function main() {
+  console.log("Main started");
+  await asyncTask1();
+  await asyncTask2();
+  console.log("Main completed");
+}
+
+main();
+```
+
+**Question:** What will be the output of this code, and how long will it take to execute completely?
+
+#### **Answer:**
+
+The output will be:
+
+```
+Main started
+Task 1 started
+Task 1 completed
+Task 2 started
+Task 2 completed
+Main completed
+```
+
+**Explanation:**
+
+- **"Main started"** is printed first.
+- **`asyncTask1`** starts and waits for 2 seconds.
+- After 2 seconds, **"Task 1 completed"** is printed.
+- **`asyncTask2`** starts and waits for 1 second.
+- After 1 second, **"Task 2 completed"** is printed.
+- Finally, **"Main completed"** is printed.
+- Total time: 2 seconds (for `asyncTask1`) + 1 second (for `asyncTask2`) = **3 seconds**.
+
+---
+
+### **Mixing `setTimeout` and `Promise` Chaining**
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+Promise.resolve()
+  .then(() => {
+    console.log("Promise 1");
+  })
+  .then(() => {
+    console.log("Promise 2");
+  });
+
+console.log("End");
+```
+
+**Question:** What is the output of the above code and why?
+
+#### **Answer:**
+
+The output will be:
+
+```
+Start
+End
+Promise 1
+Promise 2
+Timeout
+```
+
+**Explanation:**
+
+- **"Start"** is logged first.
+- The `setTimeout` callback is added to the macrotask queue.
+- The first `Promise` is resolved immediately and **"Promise 1"** is added to the microtask queue.
+- **"End"** is logged after the synchronous code completes.
+- Microtasks are processed next, so **"Promise 1"** and **"Promise 2"** are logged.
+- Finally, the `setTimeout` callback is executed, logging **"Timeout"**.
+
+These types of questions help test the understanding of JavaScript's asynchronous behavior, the event loop, the microtask vs. macrotask queue, and the correct use of `Promises` and `async/await`.
+
+
+function sayHello() { 
+  setTimeout(() => {
+    return "Hello";
+  }, 100);
+}
+
+console.log(sayHello());
+
