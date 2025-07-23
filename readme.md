@@ -26,6 +26,7 @@
 ---
 
 ### 1. Debounce Function
+
 **Question:** Implement a debounce function that delays the processing of the input function until after a specified wait time has elapsed since the last time the debounce function was invoked.
 
 ```javascript
@@ -46,6 +47,7 @@ window.addEventListener("resize", debouncedFunction);
 ---
 
 ### 2. Throttle Function
+
 **Question:** Implement a throttle function that ensures a function is called at most once in a specified time interval.
 
 ```javascript
@@ -73,6 +75,7 @@ function throttle(func, limit) {
 ---
 
 ### 3. Currying
+
 **Question:** Implement a function currying method that transforms a function with multiple arguments into a series of functions each with a single argument.
 
 ```javascript
@@ -92,6 +95,7 @@ function curry(fn) {
 ---
 
 ### 4. Deep Flatten Array
+
 **Question:** Write a function to deeply flatten an array of arrays.
 
 ```javascript
@@ -107,6 +111,7 @@ function deepFlatten(arr) {
 ---
 
 ### 5. Pipe Function
+
 **Question:** Implement a function `pipe` that performs left-to-right function composition.
 
 ```javascript
@@ -120,6 +125,7 @@ function pipe(...functions) {
 ---
 
 ### 6. Auto-retry Promises
+
 **Question:** Implement a function that retries a promise-returning function a specified number of times before rejecting.
 
 ```javascript
@@ -144,12 +150,14 @@ function autoRetry(promiseFn, retries) {
 ---
 
 ### 7. Defer & Async Script Attributes
+
 - **defer**: Downloads script in background, executes after HTML is parsed.
 - **async**: Downloads script in background, executes as soon as downloaded.
 
 ---
 
 ### 8. Async/Await, Event Loop, Callback Functions
+
 - **Async/Await**: Syntactic sugar over promises for cleaner async code.
 - **Event Loop**: Handles non-blocking operations, processes message queue.
 - **Callback Functions**: Functions passed as arguments to be executed later.
@@ -157,11 +165,13 @@ function autoRetry(promiseFn, retries) {
 ---
 
 ### 9. Promises
+
 A promise represents the eventual completion or failure of an async operation.
 
 ---
 
 ### 10. Array Methods
+
 - **forEach**: Executes a function for each array element.
 - **map**: Creates a new array with results of calling a function on every element.
 - **reduce**: Reduces array to a single value.
@@ -170,17 +180,20 @@ A promise represents the eventual completion or failure of an async operation.
 ---
 
 ### 11. Splice vs Slice
+
 - **splice**: Changes array by removing/replacing/adding elements.
 - **slice**: Returns a shallow copy of a portion of an array.
 
 ---
 
 ### 12. Prototypes
+
 Prototypes allow objects to inherit features from one another.
 
 ---
 
 ### 13. call, apply, bind
+
 - **call**: Calls a function with a given `this` and arguments individually.
 - **apply**: Calls a function with a given `this` and arguments as an array.
 - **bind**: Returns a new function with `this` bound and optional arguments.
@@ -188,6 +201,7 @@ Prototypes allow objects to inherit features from one another.
 ---
 
 ### 14. Object Methods
+
 - **Object.keys()**: Returns array of property names.
 - **Object.values()**: Returns array of property values.
 - **Object.entries()**: Returns array of [key, value] pairs.
@@ -195,11 +209,13 @@ Prototypes allow objects to inherit features from one another.
 ---
 
 ### 15. Convert Array to String
+
 - `toString()`, `join()`, `JSON.stringify()`
 
 ---
 
 ### 16. ES6 Features
+
 - **Arrow Functions**
 - **Spread Operator**
 - **Destructuring**
@@ -207,11 +223,13 @@ Prototypes allow objects to inherit features from one another.
 ---
 
 ### 17. Modules
+
 - **Export/Import**: Use `export` and `import` to share code between files.
 
 ---
 
 ### 18. Web APIs
+
 - **Local Storage**
 - **Geolocation**
 - **Session Storage**
@@ -221,6 +239,7 @@ Prototypes allow objects to inherit features from one another.
 ---
 
 ### 19. JavaScript Concepts
+
 - **Workflow**: Parsing, execution context, event handling.
 - **Hoisting**: Declarations moved to top of scope.
 - **Closure**: Functions retain access to their lexical scope.
@@ -237,6 +256,7 @@ Prototypes allow objects to inherit features from one another.
 ---
 
 ### 20. Worker Threads
+
 **Question:** What are Worker Threads in JavaScript and when should you use them?
 
 **Answer:**
@@ -244,27 +264,30 @@ Prototypes allow objects to inherit features from one another.
 Worker Threads allow JavaScript to run code in parallel on multiple threads, which is especially useful for CPU-intensive tasks. In browsers, this is achieved with Web Workers; in Node.js, with the `worker_threads` module. Worker threads do not share scope with the main thread and communicate via message passing.
 
 **Example (Node.js):**
+
 ```javascript
-const { Worker, isMainThread, parentPort } = require('worker_threads');
+const { Worker, isMainThread, parentPort } = require("worker_threads");
 
 if (isMainThread) {
   const worker = new Worker(__filename);
-  worker.on('message', (msg) => console.log('From worker:', msg));
-  worker.postMessage('Hello from main thread');
+  worker.on("message", (msg) => console.log("From worker:", msg));
+  worker.postMessage("Hello from main thread");
 } else {
-  parentPort.on('message', (msg) => {
-    parentPort.postMessage('Received: ' + msg);
+  parentPort.on("message", (msg) => {
+    parentPort.postMessage("Received: " + msg);
   });
 }
 ```
 
 **When to use:**
+
 - Heavy computations (e.g., image processing, data parsing)
 - Avoiding blocking the main event loop
 
 ---
 
 # End of Questions
+
 ### **Understanding `Promise` Constructor and `then` Method**
 
 ```javascript
@@ -397,12 +420,10 @@ Timeout
 
 These types of questions help test the understanding of JavaScript's asynchronous behavior, the event loop, the microtask vs. macrotask queue, and the correct use of `Promises` and `async/await`.
 
-
-function sayHello() { 
-  setTimeout(() => {
-    return "Hello";
-  }, 100);
+function sayHello() {
+setTimeout(() => {
+return "Hello";
+}, 100);
 }
 
 console.log(sayHello());
-
