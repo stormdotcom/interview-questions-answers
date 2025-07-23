@@ -22,6 +22,7 @@
 18. [Web APIs](#18-web-apis)
 19. [JavaScript Concepts](#19-javascript-concepts)
 20. [Worker Threads](#20-worker-threads)
+21. [Full-Stack Interview Questions (Extra)](FullStack_Interview_Questions_Extra.md)
 
 ---
 
