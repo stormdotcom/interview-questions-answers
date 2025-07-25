@@ -195,9 +195,87 @@ Prototypes allow objects to inherit features from one another.
 
 ### 13. call, apply, bind
 
-- **call**: Calls a function with a given `this` and arguments individually.
-- **apply**: Calls a function with a given `this` and arguments as an array.
-- **bind**: Returns a new function with `this` bound and optional arguments.
+# JavaScript: call, apply, and bind – Interview Questions & Answers
+
+## 1. What is the `call()` method in JavaScript? Give an example.
+
+**Answer:**
+The `call()` method allows you to call a function immediately, setting the value of `this` inside the function and passing arguments individually.
+
+**Example:**
+
+```javascript
+function greet(greeting, punctuation) {
+  console.log(greeting + ", " + this.name + punctuation);
+}
+
+const person = { name: "Alice" };
+greet.call(person, "Hello", "!"); // Output: Hello, Alice!
+```
+
+## 2. What is the `apply()` method in JavaScript? Give an example.
+
+**Answer:**
+The `apply()` method is very similar to `call()`, but you pass the function arguments as an array instead of individually.
+
+**Example:**
+
+```javascript
+function greet(greeting, punctuation) {
+  console.log(greeting + ", " + this.name + punctuation);
+}
+
+const person = { name: "Bob" };
+greet.apply(person, ["Hi", "?"]); // Output: Hi, Bob?
+```
+
+## 3. What is the difference between `call()` and `apply()`?
+
+**Answer:**
+
+- Both methods call the function immediately and allow you to set `this`.
+- The key difference is how arguments are passed:
+  - `call(thisArg, arg1, arg2, ...)`: Passes arguments individually.
+  - `apply(thisArg, [arg1, arg2, ...])`: Passes arguments as an array.
+
+## 4. What does the `bind()` method do in JavaScript? Give an example.
+
+**Answer:**
+The `bind()` method returns a new function with a specified value of `this` and, optionally, preset arguments. It does **not** call the function immediately.
+
+**Example:**
+
+```javascript
+function greet(greeting) {
+  console.log(greeting + ", " + this.name);
+}
+
+const person = { name: "Charlie" };
+const greetCharlie = greet.bind(person, "Hey");
+greetCharlie(); // Output: Hey, Charlie
+```
+
+## 5. What is the main difference between `call`/`apply` and `bind`?
+
+**Answer:**
+
+- `call()` and `apply()` invoke the function immediately with the specified context.
+- `bind()` creates a new function that, when called, has its `this` keyword set to the provided value, but does not invoke the function immediately.
+
+## 6. When would you use `bind` instead of `call`/`apply`?
+
+**Answer:**
+Use `bind` when you need to create a function with a fixed `this` value that can be called later, such as event handlers or callbacks, rather than calling the function immediately.
+
+## 7. Summary Table
+
+| Method  | Calls function immediately? | How are arguments passed? | Returns new function? |
+| ------- | --------------------------- | ------------------------- | --------------------- |
+| `call`  | Yes                         | Individually              | No                    |
+| `apply` | Yes                         | As an array               | No                    |
+| `bind`  | No                          | Individually (pre-set)    | Yes                   |
+
+Feel free to use these for quick interview prep or as reference notes!
 
 ---
 
