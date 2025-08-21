@@ -23,6 +23,7 @@
 19. [JavaScript Concepts](#19-javascript-concepts)
 20. [Worker Threads](#20-worker-threads)
 21. [Full-Stack Interview Questions (Extra)](FullStack_Interview_Questions_Extra.md)
+22. [JavaScript Output Questions](javascript.md)
 
 ---
 
