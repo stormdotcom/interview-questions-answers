@@ -1,5 +1,48 @@
 ### FrontEnd General Interview Questions and Answers
 
+## 1. Core Frontend Fundamentals
+
+- HTML5 semantics, forms, accessibility (ARIA, alt, roles).
+- CSS3: box model, positioning, flexbox, grid, responsive design.
+- JavaScript ES6+: closures, promises, async/await, event loop, hoisting, var/let/const.
+
+## 2. React.js & Ecosystem
+
+- JSX, components (functional/class), props, state.
+- Hooks (useState, useEffect, useMemo, useCallback, custom hooks).
+- State management (Context API, Redux, Zustand, etc.).
+- Virtual DOM & reconciliation.
+- Controlled vs uncontrolled components.
+- Performance optimization (memoization, lazy loading, code splitting).
+- Error boundaries, debugging, React DevTools.
+
+## 3. Modern Frontend Engineering
+
+- Build tools: Webpack, Vite, Rollup.
+- ESLint, Prettier, and code quality practices.
+- Large-scale performance strategies (bundle splitting, tree shaking, caching).
+
+#### How does CSS Flexbox differ from Grid?
+
+**Answer:**
+
+- Flexbox is 1D (row or column) — great for alignment/distribution.
+- Grid is 2D (rows + columns) — great for full page layouts.
+
+Example:
+
+- Navbars → Flexbox
+- Dashboard layouts → Grid
+
+#### Difference between relative, absolute, fixed, and sticky positioning?
+
+**Answer:**
+
+- relative: relative to itself.
+- absolute: relative to nearest positioned ancestor.
+- fixed: relative to viewport (stays on scroll).
+- sticky: hybrid; scrolls until threshold, then sticks.
+
 #### What is `useState` and `useEffect` in React?
 
 **Answer:**
@@ -58,15 +101,15 @@ Redux is a state management library for JavaScript applications, commonly used w
 Formik is a popular library used in React for handling forms. It provides a set of tools to manage form state, validation, and submission. Formik aims to reduce the boilerplate code around forms, making them easier to work with and more maintainable.
 
 ```jsx
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 
 const MyForm = () => {
   const formik = useFormik({
     initialValues: {
-      email: '',
+      email: "",
     },
-    onSubmit: values => {
-      console.log('Form data', values);
+    onSubmit: (values) => {
+      console.log("Form data", values);
     },
   });
 
@@ -92,14 +135,15 @@ const MyForm = () => {
 Axios is a promise-based HTTP client for the browser and Node.js. It makes it easy to send asynchronous HTTP requests to REST endpoints and perform CRUD operations. Axios supports automatic transformation of JSON data, interception of requests and responses, and more.
 
 ```jsx
-import axios from 'axios';
+import axios from "axios";
 
-axios.get('/user?ID=12345')
-  .then(response => {
+axios
+  .get("/user?ID=12345")
+  .then((response) => {
     console.log(response.data);
   })
-  .catch(error => {
-    console.error('Error fetching data', error);
+  .catch((error) => {
+    console.error("Error fetching data", error);
   });
 ```
 
@@ -110,41 +154,48 @@ axios.get('/user?ID=12345')
 Headers can be set in Axios requests by passing a `headers` object in the request configuration. Here is an example of how to set headers in a GET request:
 
 ```jsx
-import axios from 'axios';
+import axios from "axios";
 
-axios.get('/user?ID=12345', {
-  headers: {
-    'Authorization': 'Bearer token',
-    'Content-Type': 'application/json'
-  }
-})
-  .then(response => {
+axios
+  .get("/user?ID=12345", {
+    headers: {
+      Authorization: "Bearer token",
+      "Content-Type": "application/json",
+    },
+  })
+  .then((response) => {
     console.log(response.data);
   })
-  .catch(error => {
-    console.error('Error fetching data', error);
+  .catch((error) => {
+    console.error("Error fetching data", error);
   });
 ```
 
 In a POST request, you can set headers similarly:
 
 ```jsx
-axios.post('/user', {
-  firstName: 'Fred',
-  lastName: 'Flintstone'
-}, {
-  headers: {
-    'Authorization': 'Bearer token',
-    'Content-Type': 'application/json'
-  }
-})
-  .then(response => {
+axios
+  .post(
+    "/user",
+    {
+      firstName: "Fred",
+      lastName: "Flintstone",
+    },
+    {
+      headers: {
+        Authorization: "Bearer token",
+        "Content-Type": "application/json",
+      },
+    }
+  )
+  .then((response) => {
     console.log(response.data);
   })
-  .catch(error => {
-    console.error('Error posting data', error);
+  .catch((error) => {
+    console.error("Error posting data", error);
   });
 ```
+
 ## How to Create a Custom Hook in React
 
 ### Steps to Create a Custom Hook
@@ -162,17 +213,17 @@ Let's create a custom hook called `useCounter` that manages a counter state. Thi
 Create a file named `useCounter.js` and add the following code:
 
 ```javascript
-import { useState } from 'react';
+import { useState } from "react";
 
 // Custom Hook
 function useCounter(initialValue = 0) {
-    const [count, setCount] = useState(initialValue);
+  const [count, setCount] = useState(initialValue);
 
-    const increment = () => setCount(count + 1);
-    const decrement = () => setCount(count - 1);
-    const reset = () => setCount(initialValue);
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+  const reset = () => setCount(initialValue);
 
-    return { count, increment, decrement, reset };
+  return { count, increment, decrement, reset };
 }
 
 export default useCounter;
@@ -192,20 +243,20 @@ Now, let's use the `useCounter` hook in a functional component.
 Create a file named `CounterComponent.js` and add the following code:
 
 ```javascript
-import React from 'react';
-import useCounter from './useCounter';
+import React from "react";
+import useCounter from "./useCounter";
 
 function CounterComponent() {
-    const { count, increment, decrement, reset } = useCounter(10);
+  const { count, increment, decrement, reset } = useCounter(10);
 
-    return (
-        <div>
-            <h1>Count: {count}</h1>
-            <button onClick={increment}>Increment</button>
-            <button onClick={decrement}>Decrement</button>
-            <button onClick={reset}>Reset</button>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
 }
 
 export default CounterComponent;
@@ -225,17 +276,17 @@ Here is how the custom hook and component would look together in a simple React 
 #### `useCounter.js`
 
 ```javascript
-import { useState } from 'react';
+import { useState } from "react";
 
 // Custom Hook
 function useCounter(initialValue = 0) {
-    const [count, setCount] = useState(initialValue);
+  const [count, setCount] = useState(initialValue);
 
-    const increment = () => setCount(count + 1);
-    const decrement = () => setCount(count - 1);
-    const reset = () => setCount(initialValue);
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+  const reset = () => setCount(initialValue);
 
-    return { count, increment, decrement, reset };
+  return { count, increment, decrement, reset };
 }
 
 export default useCounter;
@@ -244,20 +295,20 @@ export default useCounter;
 #### `CounterComponent.js`
 
 ```javascript
-import React from 'react';
-import useCounter from './useCounter';
+import React from "react";
+import useCounter from "./useCounter";
 
 function CounterComponent() {
-    const { count, increment, decrement, reset } = useCounter(10);
+  const { count, increment, decrement, reset } = useCounter(10);
 
-    return (
-        <div>
-            <h1>Count: {count}</h1>
-            <button onClick={increment}>Increment</button>
-            <button onClick={decrement}>Decrement</button>
-            <button onClick={reset}>Reset</button>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
 }
 
 export default CounterComponent;
@@ -266,15 +317,15 @@ export default CounterComponent;
 #### `App.js`
 
 ```javascript
-import React from 'react';
-import CounterComponent from './CounterComponent';
+import React from "react";
+import CounterComponent from "./CounterComponent";
 
 function App() {
-    return (
-        <div className="App">
-            <CounterComponent />
-        </div>
-    );
+  return (
+    <div className="App">
+      <CounterComponent />
+    </div>
+  );
 }
 
 export default App;
@@ -287,6 +338,7 @@ export default App;
 - `App.js` is the main application component that renders `CounterComponent`.
 
 ---
+
 Certainly! Below is a list of commonly asked React interview questions for a senior UI developer, along with their answers and example code, formatted in Markdown.
 
 ---
@@ -297,6 +349,7 @@ Certainly! Below is a list of commonly asked React interview questions for a sen
 
 **Answer:**
 React is a popular JavaScript library for building user interfaces. Its key features include:
+
 - **Component-Based Architecture:** Building encapsulated components that manage their own state and compose them to make complex UIs.
 - **Virtual DOM:** React creates a virtual DOM and updates it efficiently, minimizing direct DOM manipulation.
 - **One-Way Data Binding:** Data flows in a single direction, making it easier to debug and understand.
@@ -305,8 +358,9 @@ React is a popular JavaScript library for building user interfaces. Its key feat
 ## 2. Explain the difference between functional and class components.
 
 **Answer:**
+
 - **Class Components:** These are ES6 classes that extend from `React.Component` and must have a `render` method returning JSX. They can hold and manage local state and have lifecycle methods.
-  
+
   ```jsx
   class MyComponent extends React.Component {
     constructor(props) {
@@ -318,7 +372,9 @@ React is a popular JavaScript library for building user interfaces. Its key feat
       return (
         <div>
           <p>Count: {this.state.count}</p>
-          <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          <button
+            onClick={() => this.setState({ count: this.state.count + 1 })}
+          >
             Increment
           </button>
         </div>
@@ -328,7 +384,7 @@ React is a popular JavaScript library for building user interfaces. Its key feat
   ```
 
 - **Functional Components:** These are simpler and are just functions that receive props as an argument and return JSX. They can use hooks to manage state and lifecycle methods.
-  
+
   ```jsx
   function MyComponent() {
     const [count, setCount] = React.useState(0);
@@ -336,9 +392,7 @@ React is a popular JavaScript library for building user interfaces. Its key feat
     return (
       <div>
         <p>Count: {count}</p>
-        <button onClick={() => setCount(count + 1)}>
-          Increment
-        </button>
+        <button onClick={() => setCount(count + 1)}>Increment</button>
       </div>
     );
   }
@@ -348,6 +402,7 @@ React is a popular JavaScript library for building user interfaces. Its key feat
 
 **Answer:**
 Hooks are functions that let you "hook into" React state and lifecycle features from functional components. Some commonly used hooks are:
+
 - `useState`: Allows you to add state to functional components.
 - `useEffect`: Allows you to perform side effects in function components.
 - `useContext`: Lets you subscribe to React context without introducing nesting.
@@ -355,7 +410,7 @@ Hooks are functions that let you "hook into" React state and lifecycle features 
 Example using `useState` and `useEffect`:
 
 ```jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function ExampleComponent() {
   const [count, setCount] = useState(0);
@@ -367,9 +422,7 @@ function ExampleComponent() {
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   );
 }
@@ -383,9 +436,9 @@ The Context API is a way to pass data through the component tree without having 
 Example:
 
 ```jsx
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext } from "react";
 
-const ThemeContext = createContext('light');
+const ThemeContext = createContext("light");
 
 function App() {
   return (
@@ -405,7 +458,11 @@ function Toolbar() {
 
 function ThemedButton() {
   const theme = useContext(ThemeContext);
-  return <button style={{ background: theme === 'dark' ? '#333' : '#FFF' }}>I am styled by theme context!</button>;
+  return (
+    <button style={{ background: theme === "dark" ? "#333" : "#FFF" }}>
+      I am styled by theme context!
+    </button>
+  );
 }
 ```
 
@@ -417,11 +474,11 @@ Handling forms in React involves managing form state, handling user inputs, and 
 Example:
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function MyForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -432,12 +489,20 @@ function MyForm() {
     <form onSubmit={handleSubmit}>
       <label>
         Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </label>
       <br />
       <label>
         Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </label>
       <br />
       <button type="submit">Submit</button>
@@ -486,7 +551,7 @@ React fragments allow you to group multiple elements without adding extra nodes 
 Example:
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 function FragmentExample() {
   return (
@@ -502,6 +567,7 @@ function FragmentExample() {
 
 **Answer:**
 Performance optimization in React can be achieved through several techniques:
+
 - **Memoization:** Using `React.memo` to prevent unnecessary re-renders.
 - **useCallback and useMemo Hooks:** To memoize functions and values respectively.
 - **Code Splitting:** Using dynamic `import()` to split code into smaller bundles.
@@ -510,10 +576,10 @@ Performance optimization in React can be achieved through several techniques:
 Example using `React.memo` and `useCallback`:
 
 ```jsx
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from "react";
 
 const Child = React.memo(({ onClick }) => {
-  console.log('Child rendered');
+  console.log("Child rendered");
   return <button onClick={onClick}>Click me</button>;
 });
 
@@ -541,12 +607,12 @@ Higher-order components (HOC) are functions that take a component and return a n
 Example:
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 function withLogging(WrappedComponent) {
   return class extends React.Component {
     componentDidMount() {
-      console.log('Component mounted');
+      console.log("Component mounted");
     }
 
     render() {
@@ -570,7 +636,7 @@ Error boundaries are React components that catch JavaScript errors anywhere in t
 Example:
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -583,7 +649,7 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Error:', error, errorInfo);
+    console.error("Error:", error, errorInfo);
   }
 
   render() {
@@ -591,12 +657,12 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 
 function MyComponent() {
-  throw new Error('Test error');
+  throw new Error("Test error");
   return <div>My Component</div>;
 }
 
@@ -610,4 +676,3 @@ function App() {
 ```
 
 ---
-
