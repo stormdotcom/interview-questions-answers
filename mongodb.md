@@ -109,11 +109,13 @@ db.sales.aggregate([
 ```
 
 8. Explain the Concept of Write Concern and Its Importance in MongoDB
+
    Write Concern in MongoDB refers to the level of acknowledgment requested from MongoDB for write operations. It determines how many nodes must confirm the write operation before it is considered successful. Write concern levels range from "acknowledged" (default) to "unacknowledged," "journaled," and various "replica acknowledged" levels.
 
 The importance of write concern lies in balancing between data durability and performance. Higher write concern ensures data is safely written to disk and replicated, but it may impact performance due to the added latency.
 
 9. What are TTL Indexes, and How are They Used in MongoDB?
+
    TTL (Time To Live) Indexes in MongoDB are special indexes that automatically remove documents from a collection after a certain period. They are commonly used for data that needs to expire after a specific time, such as session information, logs, or temporary data. To create a TTL index, you can specify the expiration time in seconds.
 
 Example: Remove documents 1 hour after createdAt:
@@ -123,6 +125,7 @@ db.sessions.createIndex({ createdAt: 1 }, { expireAfterSeconds: 3600 });
 ```
 
 10. How to Handle Schema Design and Data Modeling in MongoDB?
+
     Schema design and data modeling in MongoDB involve defining how data is organized and stored in a document-oriented database. Unlike SQL databases, MongoDB offers flexible schema design, which can be both an advantage and a challenge. Key considerations for schema design include:
 
 - Embedding vs. Referencing: Deciding whether to embed related data within a single document or use references between documents.
@@ -132,19 +135,21 @@ db.sessions.createIndex({ createdAt: 1 }, { expireAfterSeconds: 3600 });
 - Sharding: Designing the schema to support sharding if horizontal scaling is required.
 
 11. What is GridFS, and When is It Used in MongoDB?
+
     GridFS is a specification for storing and retrieving large files in MongoDB. It is used when files exceed the BSON-document size limit of 16 MB or when you need to perform efficient retrieval of specific file sections.
 
 GridFS splits a large file into smaller chunks and stores each chunk as a separate document within two collections: `fs.files` and `fs.chunks`. This allows for efficient storage and retrieval of large files, such as images, videos, or large datasets.
 
 12. Explain the Differences Between WiredTiger and MMAPv1 Storage Engines.
-    | Feature | WiredTiger | MMAPv1 |
-    | -------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------- |
-    | Concurrency | Document-level concurrency, allowing multiple operations simultaneously. | Collection-level concurrency, limiting performance under heavy write operations. |
-    | Compression | Supports data compression, reducing storage requirements. | Does not support data compression. |
-    | Performance | Generally offers better performance and efficiency for most workloads. | Limited performance, especially under heavy workloads. |
-    | Journaling | Uses write-ahead logging for better data integrity. | Basic journaling; less advanced than WiredTiger. |
-    | Status | Modern and default storage engine. | Legacy engine, deprecated in favor of WiredTiger. |
-    | Implementation | Advanced implementation with additional features. | Simple implementation but lacks advanced features. |
+
+    | Feature        | WiredTiger                                                               | MMAPv1                                                                           |
+    | -------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+    | Concurrency    | Document-level concurrency, allowing multiple operations simultaneously. | Collection-level concurrency, limiting performance under heavy write operations. |
+    | Compression    | Supports data compression, reducing storage requirements.                | Does not support data compression.                                               |
+    | Performance    | Generally offers better performance and efficiency for most workloads.   | Limited performance, especially under heavy workloads.                           |
+    | Journaling     | Uses write-ahead logging for better data integrity.                      | Basic journaling; less advanced than WiredTiger.                                 |
+    | Status         | Modern and default storage engine.                                       | Legacy engine, deprecated in favor of WiredTiger.                                |
+    | Implementation | Advanced implementation with additional features.                        | Simple implementation but lacks advanced features.                               |
 
 13. How to Handle Transactions in MongoDB?
     MongoDB supports multi-document ACID transactions by allowing us to perform a series of read and write operations across multiple documents and collections in a transaction. This ensures data consistency and integrity. To use transactions we typically start a session, begin a transaction, perform the operations, and then commit or abort the transaction.
@@ -166,6 +171,7 @@ try {
 ```
 
 14. Describe the MongoDB Compass Tool and Its Functionalities
+
     MongoDB Compass is a graphical user interface (GUI) tool for MongoDB that provides an easy way to visualize, explore, and manipulate your data. It offers features such as:
 
 - Schema Visualization: View and analyze your data schema, including field types and distributions.
@@ -177,6 +183,7 @@ try {
 - Data Import/Export: Easily import and export data between MongoDB and JSON/CSV files.
 
 15. What is MongoDB Atlas, and How Does It Differ From Self-Hosted MongoDB?
+
     MongoDB Atlas is a fully managed cloud database service provided by MongoDB. It offers automated deployment, scaling, and management of MongoDB clusters across various cloud providers (AWS, Azure, Google Cloud). Key differences from self-hosted MongoDB include:
 
 - Managed Service: Atlas handles infrastructure management, backups, monitoring, and upgrades.
@@ -186,6 +193,7 @@ try {
 - Integrations: Seamless integration with other cloud services and MongoDB tools.
 
 16. How to Implement Access Control and User Authentication in MongoDB?
+
     Access control and user authentication in MongoDB are implemented through a role-based access control (RBAC) system. You create users and assign roles that define their permissions. To set up access control:
 
 - Enable Authentication: Configure MongoDB to require authentication by starting the server with --auth or setting security.authorization to enabled in the configuration file.
@@ -212,6 +220,7 @@ db.createCollection("logs", { capped: true, size: 100000 });
 ```
 
 18. Explain the Concept of Geospatial Indexes in MongoDB.
+
     Geospatial indexes in MongoDB are special indexes that support querying of geospatial data, such as locations and coordinates. They enable efficient queries for proximity, intersections, and other spatial relationships. MongoDB supports two types of geospatial indexes: 2d for flat geometries and 2dsphere for spherical geometries.
 
 Example:
@@ -221,6 +230,7 @@ db.places.createIndex({ location: "2dsphere" });
 ```
 
 19. How to Handle Backups and Disaster Recovery in MongoDB?
+
     Handling backups and disaster recovery in MongoDB involves regularly creating backups of your data and having a plan for restoring data in case of failure. Methods include:
 
 - Mongodump/Mongorestore: Use the mongodump and mongorestore utilities to create and restore binary backups.
@@ -229,6 +239,7 @@ db.places.createIndex({ location: "2dsphere" });
 - Replica Sets: Use replica sets to ensure data redundancy and high availability. Regularly test the failover and recovery process.
 
 20. Describe the Process of Upgrading MongoDB to a Newer Version
+
     Upgrading MongoDB to a newer version involves several steps to ensure a smooth transition:
 
 - Check Compatibility: Review the release notes and compatibility changes for the new version.
@@ -239,6 +250,7 @@ db.places.createIndex({ location: "2dsphere" });
 - Monitor: Monitor the database performance and logs to ensure a successful upgrade.
 
 21. What are Change Streams in MongoDB, and How are They Used?
+
     Change Streams in MongoDB allow applications to listen for real-time changes to data in collections, databases, or entire clusters. They provide a powerful way to implement event-driven architectures by capturing insert, update, replace, and delete operations. To use Change Streams, you typically open a change stream cursor and process the change events as they occur.
 
 Example:
@@ -251,6 +263,7 @@ changeStream.on("change", (change) => {
 ```
 
 22. Explain the Use of Hashed Sharding Keys in MongoDB
+
     Hashed Sharding Keys in MongoDB distribute data across shards using a hashed value of the shard key field. This approach ensures an even distribution of data and avoids issues related to data locality or uneven data distribution that can occur with range-based sharding. Hashed sharding is useful for fields with monotonically increasing values, such as timestamps or identifiers.
 
 Example:
@@ -261,6 +274,7 @@ sh.shardCollection("mydb.mycollection", { _id: "hashed" });
 ```
 
 23. How to Optimize MongoDB Queries for Performance?
+
     Optimizing MongoDB queries involves several strategies:
 
 - Indexes: Create appropriate indexes to support query patterns.
@@ -270,6 +284,7 @@ sh.shardCollection("mydb.mycollection", { _id: "hashed" });
 - Aggregation Pipeline: Optimize the aggregation pipeline stages to minimize data processing and improve efficiency.
 
 24. Describe the Map-Reduce Functionality in MongoDB
+
     Map-Reduce in MongoDB is a data processing paradigm used to perform complex data aggregation operations. It consists of two phases: the map phase processes each input document and emits key-value pairs, and the reduce phase processes all emitted values for each key and outputs the final result.
 
 Example:
@@ -287,6 +302,7 @@ db.collection.mapReduce(
 ```
 
 25. What is the Role of Journaling in MongoDB, and How Does It Impact Performance?
+
     Journaling in MongoDB ensures data durability and crash recovery by recording changes to the data in a journal file before applying them to the database files. This mechanism allows MongoDB to recover from unexpected shutdowns or crashes by replaying the journal. While journaling provides data safety, it can impact performance due to the additional I/O operations required to write to the journal file.
 
 26. How to Implement Full-Text Search in MongoDB?
@@ -300,6 +316,7 @@ db.collection.find({ $text: { $search: "mongodb" } });
 ```
 
 27. What are the Considerations for Deploying MongoDB in a Production Environment?
+
     Considerations for deploying MongoDB in a production environment include:
 
 - Replication: Set up replica sets for high availability and data redundancy.
@@ -311,9 +328,11 @@ db.collection.find({ $text: { $search: "mongodb" } });
 - Maintenance: Regularly update MongoDB to the latest stable version and perform routine maintenance tasks.
 
 28. Explain the Concept of Horizontal Scalability and Its Implementation in MongoDB
+
     Horizontal Scalability in MongoDB refers to the ability to add more servers to distribute the load and data. This is achieved through sharding, where data is partitioned across multiple shards. Each shard is a replica set that holds a subset of the data. Sharding allows MongoDB to handle large datasets and high-throughput operations by distributing the workload.
 
 29. How to Monitor and Troubleshoot Performance Issues in MongoDB?
+
     Monitoring and troubleshooting performance issues in MongoDB involve:
 
 - Monitoring Tools: Use tools like MongoDB Cloud Manager, MongoDB Ops Manager, or third-party monitoring solutions.
@@ -324,6 +343,7 @@ db.collection.find({ $text: { $search: "mongodb" } });
 - Resource Utilization: Monitor CPU, memory, and disk I/O usage to identify resource constraints.
 
 30. Describe the Process of Migrating Data from a Relational Database to MongoDB
+
     Migrating data from a relational database to MongoDB involves several steps:
 
 - Schema Design: Redesign the relational schema to fit MongoDB's document-oriented model. Decide on embedding vs. referencing, and plan for indexes and collections.
